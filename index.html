@@ -1,0 +1,271 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="description" content="Zero-Shot Video Question Answering with Procedural Programs">
+  <meta name="keywords" content="proviq, video, question-answering, zero-shot, llm">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RLT</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="css/bulma-slider.min.css">
+  <link rel="stylesheet" href="css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="css/academicons.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <!-- <link rel="icon" href="fonts/snake.svg"> -->
+
+  <script src="js/jquery.min.js"></script>
+  <script defer src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/index.js"></script>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DFG5F09VJ"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8DFG5F09VJ');
+</script></head> -->
+<!-- Google tag (gtag.js) -->
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class=" title is-1 publication-title">Run-Length Tokenization for Faster Video Transformers</h1>
+              <div class="is-size-3 publication-authors">
+                <span class="author-block" id="author1">anonymous authors</a></span>
+                <!-- <span class="author-block" id="author2">Guanglei Zhu</span> -->
+              <!-- </div>  -->
+                <!-- <div class="is-size-3 publication-authors">
+                  <span class="author-block">Robotics Institute, Carnegie Mellon University</span>
+                </div> -->
+                
+                <!-- Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                </a>
+              </span> -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="media/visualized_video5.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        We visualize active patches in blue squares produced by our method.
+      </h2>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present Run-Length Tokenization (RLT), a simple and efficient approach to speed up video transformers by removing redundant tokens from the input. Existing methods prune tokens progressively, incurring significant overhead and resulting in no speedup during training. Other approaches are content-agnostic: they reduce the number of tokens by a constant factor and thus require tuning for different datasets and videos for optimal performance.
+Our insight is that we can efficiently identify which patches are redundant before running the model. In contrast, RLT efficiently identifies and removes all tokens that are repeated over time before running the model, replacing them with a single token and a positional encoding to represent its new length. 
+This approach is both content-aware, requiring no tuning for different datasets, and fast, incurring negligible overhead. RLT can increase the throughput of pre-trained transformers without any additional training, increasing throughput by 40% with only 0.1% drop in accuracy on action recognition. It also results in a large speedup in training, reducing the wall-clock time to fine-tune a video transformer by more than 40% while matching the baseline model performance. These benefits extend to video-language tasks, with RLT matching baseline performance on Epic Kitchens-100 multi-instance retrieval while reducing training time and throughput by 30%. 
+On Kinetics-400, Something-Something-v2, and UCF101, RLT is able to reduce the total token count by 30%, and on longer videos or higher FPS settings, can reduce the token count by up to 80%.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <style>
+  iframe {
+    width: 400px;
+    height: 385px;
+  }
+</style> -->
+
+
+<section class="hero is-light is-small">
+  <div class="container is-centered has-text-centered">
+    <br>
+    <h2 class="title is-3">Sample Results</h2>
+    We present some sample video results of Run-Length Tokenization (RLT) on a variety of video question answering benchmarks. Click the thumbnails to play the videos.
+    <div class="video-grid">
+      <div class="video-cell">
+        <video id="kinetics1" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/kinetics1.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the Kinetics dataset.</p>
+      </div>
+      <div class="video-cell">
+        <video id="kinetics2" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/kinetics2.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the Kinetics dataset.</p>
+      </div>
+      <div class="video-cell">
+        <video id="ssv2" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/ssv2.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the Something-Something dataset.</p>
+      </div>
+      <div class="video-cell">
+        <video id="ssv2_2" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/ssv2_2.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the Something-Something  dataset.</p>
+      </div>
+      <div class="video-cell">
+        <video id="ucf101" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/ucf101.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the UCF101 dataset.</p>
+      </div>
+      <div class="video-cell">
+        <video id="ucf101_2" muted playsinline width="600" height="482" poster="./static/poster_play.png">
+          <source src="media/ucf101_2.mp4" fetchpriority="high" type="video/mp4">
+        </video>
+        <p>Sample results from the UCF101 dataset.</p>
+      </div>
+      
+    </div>
+    <br>
+  </div>
+</section>
+
+
+
+
+
+<style>
+  .hero-body2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .content2 {
+    text-align: center;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .video-cell {
+    margin: 5px;
+    text-align: center;
+  }
+
+  iframe {
+    width: 100%;
+    height: 385px;
+  }
+</style>
+
+
+<section class="hero is-small">
+  <div class="container is-centered ">
+    <br>
+    <h2 class="title is-3">Related Work</h2>
+    Our project was inspired by several other related papers, which we highly encourage reading as well.
+    <ul>
+      <li>• <a href="https://arxiv.org/abs/1712.00636/">Compressed Video Action Recognition</a></li>
+      <li>• <a href="https://arxiv.org/abs/2212.00794">Scaling Language-Image Pre-training via Masking</a></li>
+      <li>• <a href="https://arxiv.org/abs/2307.06304">Patch and Pack: NaViT, a Vision Transformer for any Aspect Ratio and Resolution</a></li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="hero is-small" id="BibTeX">
+  <div class="container bibtex">
+    <h2>BibTeX</h2>
+    <div class="container is-max-desktop" style="margin-top:25px">
+      <pre class="columns "><code id="bibtex" class="column is-11">
+        @inproceedings{liu2024,
+          title={Run-Length Tokenization for Faster Video Transformers},
+          author={Liu, Sihan and Zhu, Guanglei},
+          year={2024}
+        }
+      }</code><button type="button" onclick="copyClipboard()" class="button-copy" title="Click to copy to clipboard"></button></pre>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content acknowledgements">
+          <p>
+            This webpage template was inspired by <a href="https://nerfies.github.io/">this</a> and <a href="https://viper.cs.columbia.edu">this</a> project pages.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  function copyClipboard() {
+  // Get the text field
+    var r = document.createRange();
+    r.selectNode(document.getElementById("bibtex"));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+
+  }
+</script>
+
+<!-- <script>
+  document.getElementById('teaser').play();
+</script> -->
+
+</body></html>
